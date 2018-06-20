@@ -1,5 +1,5 @@
 const formatDate = (timeInSeconds) => {
-    if (timeInSeconds === 0 || timeInSeconds == '') {
+    if (timeInSeconds === 0 || timeInSeconds == '' || isNaN(timeInSeconds)) {
         return '0s';
     } else if (timeInSeconds < 60) {
         return `${timeInSeconds}s`;
@@ -14,6 +14,8 @@ const formatDate = (timeInSeconds) => {
             return `${timeInSeconds / 3600}h`;
         } else if (timeInSeconds % 60 === 0) {
             return `${Math.floor(timeInSeconds / 3600)}h ${timeInSeconds % 3600 / 60}m`;
+        } else if (timeInSeconds % 3600 < 60) {
+            return `${Math.floor(timeInSeconds / 3600)}h ${timeInSeconds % 3600 % 60}s`;
         } else {
             return `${Math.floor(timeInSeconds / 3600)}h ${Math.floor(timeInSeconds % 3600 / 60)}m ${timeInSeconds % 3600 % 60}s`;
         }
